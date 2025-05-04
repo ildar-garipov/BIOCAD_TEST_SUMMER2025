@@ -1,0 +1,112 @@
+Кодирование местоположений:
+COR: 0
+INT: 1
+RIM: 2
+SUP: 3
+SUR: 4
+Создан датасет с 1903 строками и 16 столбцами
+
+Файлы для обучения модели сохранены:
+- X_features_factorized.csv (признаки)
+- y_target.csv (целевая переменная)
+Размерность признаков: (1903, 14)
+Размерность данных: X=(1903, 13), y=(1903,)
+Распределение классов: [1479  424]
+Процент положительных примеров: 22.3%
+
+Признаки:
+1. wt_hydrophobic
+2. wt_size
+3. wt_charge
+4. wt_flexibility
+5. mut_hydrophobic
+6. mut_size
+7. mut_charge
+8. mut_flexibility
+9. delta_hydrophobic
+10. delta_size
+11. delta_charge
+12. delta_flexibility
+13. mutation_location_encoded
+
+1. Логистическая регрессия
+              precision    recall  f1-score   support
+
+           0       0.78      1.00      0.87       296
+           1       0.00      0.00      0.00        85
+
+    accuracy                           0.78       381
+   macro avg       0.39      0.50      0.44       381
+weighted avg       0.60      0.78      0.68       381
+
+
+2. Random Forest
+              precision    recall  f1-score   support
+
+           0       0.80      0.95      0.87       296
+           1       0.48      0.15      0.23        85
+
+    accuracy                           0.77       381
+   macro avg       0.64      0.55      0.55       381
+weighted avg       0.73      0.77      0.73       381
+
+
+3. Gradient Boosting
+              precision    recall  f1-score   support
+
+           0       0.79      0.99      0.88       296
+           1       0.70      0.08      0.15        85
+
+    accuracy                           0.79       381
+   macro avg       0.74      0.54      0.51       381
+weighted avg       0.77      0.79      0.72       381
+
+
+4. SVM
+              precision    recall  f1-score   support
+
+           0       0.78      1.00      0.87       296
+           1       0.00      0.00      0.00        85
+
+    accuracy                           0.78       381
+   macro avg       0.39      0.50      0.44       381
+weighted avg       0.60      0.78      0.68       381
+
+
+Сравнение моделей:
+                     accuracy  precision    recall        f1   roc_auc
+Logistic Regression  0.776903   0.000000  0.000000  0.000000  0.632393
+Random Forest        0.774278   0.481481  0.152941  0.232143  0.654571
+Gradient Boosting    0.787402   0.700000  0.082353  0.147368  0.665620
+SVM                  0.776903   0.000000  0.000000  0.000000  0.559181
+
+Точность по местоположениям:
+location_name
+INT    0.850000
+COR    0.847368
+SUP    0.763158
+RIM    0.676471
+SUR    0.612903
+dtype: float64
+
+Подбор гиперпараметров для Random Forest...
+Fitting 5 folds for each of 108 candidates, totalling 540 fits
+Лучшие параметры: {'max_depth': 10, 'min_samples_leaf': 4, 'min_samples_split': 2, 'n_estimators': 50}
+Лучший ROC AUC: 0.633
+
+Результаты Random Forest с оптимальными параметрами:
+              precision    recall  f1-score   support
+
+           0       0.78      0.99      0.87       296
+           1       0.50      0.04      0.07        85
+
+    accuracy                           0.78       381
+   macro avg       0.64      0.51      0.47       381
+weighted avg       0.72      0.78      0.69       381
+
+ROC AUC: 0.644
+
+Модель и scaler сохранены в файлы:
+- best_random_forest_model_factorized.joblib
+- scaler_factorized.joblib
+- location_encoder.joblib (уже сохранен ранее)
